@@ -848,8 +848,10 @@ stream {
         {{ $all := .First }}
         {{ $server := .Second }}
 
+        {{ if not (contains $server.ServerSnippet "listen ") }}
         {{ buildHTTPListener  $all $server.Hostname }}
         {{ buildHTTPSListener $all $server.Hostname }}
+        {{ end }}
 
         set $proxy_upstream_name "-";
 
